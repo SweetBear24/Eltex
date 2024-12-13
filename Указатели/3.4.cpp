@@ -4,18 +4,27 @@
 int main(void) {
     char text[6];     
     char substring[3];
-    char *substring_ptr;
+    char *substring_ptr = NULL; 
 
-    
     printf("Enter a 5-character text: ");
     scanf("%5s", text); 
 
-    
     printf("Enter a 2-character substring: ");
     scanf("%2s", substring);
 
-    
-    substring_ptr = strstr(text, substring);
+    for (int i = 0; i <= strlen(text) - strlen(substring); i++) {
+        int found = 1;
+        for (int j = 0; j < strlen(substring); j++) {
+            if (text[i + j] != substring[j]) {
+                found = 0;
+                break;
+            }
+        }
+        if (found) {
+            substring_ptr = &text[i];
+            break;
+        }
+    }
 
     if (substring_ptr) {
         long position = substring_ptr - text;
